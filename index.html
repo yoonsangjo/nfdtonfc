@@ -12,27 +12,21 @@
     <h1 class="title">깨진 텍스트 변환</h1>
     <div class="wrap">
       <textarea id="text" type="text"></textarea>
-      <button id="convertBtn">변환</button>
-      <textarea id="result" type="text" readonly></textarea>
-      <button id="copyBtn">복사</button>
+      <button id="convertBtn">변환 및 복사</button>
     </div>
   </body>
   <script>
     const text = document.querySelector('#text');
     const convertBtn = document.querySelector('#convertBtn');
-    const result = document.querySelector('#result');
-    const copyBtn = document.querySelector('#copyBtn');
 
     const handleConvertBtnClick = () => {
-      result.value = text.value.normalize('NFC');
-    };
-
-    const handleCopyBtnClick = () => {
-      navigator.clipboard.writeText(result.value);
-      alert('복사되었습니다.');
+      text.value = text.value.normalize('NFC');
+      setTimeout(() => {
+        navigator.clipboard.writeText(text.value);
+        alert('복사되었습니다.');
+      }, 200);
     };
 
     convertBtn.addEventListener('click', handleConvertBtnClick);
-    copyBtn.addEventListener('click', handleCopyBtnClick);
   </script>
 </html>
